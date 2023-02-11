@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "allowJs": true,
+    "module": "commonjs",
+    "target": "ESNEXT",
+     "allowSyntheticDefaultImports": true,
+     "esModuleInterop": true,
+     "experimentalDecorators": true,
+     "strictNullChecks": true,
+     "emitDecoratorMetadata": true,
+     "exactOptionalPropertyTypes": true,
+     "strictPropertyInitialization": false,
+     "resolveJsonModule": true   
+  }
+}
+

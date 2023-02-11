@@ -1,0 +1,26 @@
+
+// Nazarqosim, [11.02.2023 11:01]
+{
+    "root": true,
+    "env": {
+      "node": true,
+      "jest": true
+    },
+    "extends": [
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "@typescript-eslint/eslint-plugin",
+      "prettier"
+    ],
+    "rules": {
+      "semi": "off",
+      "quotes": ["error", "single"],
+      "@typescript-eslint/no-namespace":"off"
+    }
+  }

@@ -1,0 +1,2377 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Exam for 4 month Meros App",
+        "description": "This is Meros App for Exam this app for online shops",
+        "version": "0.0.0"
+    },
+    "paths": {
+        "/meros/category-get": {
+            "get": {
+                "sammary": "Get all Categories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "id": "7c051d9a-bc11-4615-b65c-7cc0b1e0846c",
+                                        "name": "book"
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "default": "200",
+                                        "description": "Status of the response"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Category"
+                ]
+            }
+        },
+        "/meros/create-category": {
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Create Category",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title": "Clothes"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "cat_title": "Clothes"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/meros/update-category/{id}": {
+            "put": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Update Category",
+                "parameters": [{
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "description": "With this api you can update Category",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title": "Books"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Update",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "id": "1120f438-9713-4cab-830e-0bbf97fa3446",
+                                                "title": "Books"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/delete-category/{id}": {
+            "delete": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Delete Category",
+                "parameters": [{
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "Category Deleted Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Delete",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "204",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "id": "fb5c6fb0-47f9-4a49-aceb-aa2b50a2556b",
+                                                "title": "Books"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/category-byId/{categoryId}": {
+            "get": {
+                "tags": ["Category"],
+                "summary": "Get one Category and it's sub categories and products",
+                "description": "With this api you can view Category",
+                "parameters": [{
+                        "in": "path",
+                        "name": "categoryId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view Category",
+                                            "default": [{
+                                                    "id": "4e0c4333-e451-4a41-83ab-9cc97ae908d7",
+                                                    "title": "Clothes",
+                                                    "sub_category": [],
+                                                    "sub_sub_category": [],
+                                                    "products": []
+                                                }]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/subcategory-get": {
+            "get": {
+                "tags": ["subCategory"],
+                "summary": "View a new subCategory",
+                "description": "With this api you can view subCategory",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view subCategory",
+                                            "default": [{
+                                                    "id": "1120f438-9713-4cab-830e-0bbf97fa3446",
+                                                    "title": "OK"
+                                                },
+                                                {
+                                                    "id": "4fbd4292-21f1-48e8-aa23-6c49046a2664",
+                                                    "title": "OK"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/create-subcategory": {
+            "post": {
+                "tags": ["subCategory"],
+                "summary": "create subCategory",
+                "description": "With this api you can create subCategory",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "categoryId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title": "Women",
+                                    "categoryId": "1120f438-9713-4cab-830e-0bbf97fa3446"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Create",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "id": "d6fb51de-6adc-4d6c-ba3e-97f2ea9647fb",
+                                                "title": "Clothes",
+                                                "categoryId": "4e0c4333-e451-4a41-83ab-9cc97ae908d7"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/update-subcategory/{id}": {
+            "put": {
+                "tags": ["subCategory"],
+                "summary": "update subCategory",
+                "parameters": [{
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "description": "With this api you can update subCategory",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "categoryId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title": "Romance",
+                                    "categoryId": "1a1c3e98-10ba-4a73-86b4-14c5063b3486"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Update",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "id": "0c48bcc9-59d4-4df3-be2c-0e64ff77d83b",
+                                                "title": "Dramma",
+                                                "subCatId": "d970a5ed-96af-4729-b381-665198234382"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/delete-subcategory/{id}": {
+            "delete": {
+                "tags": ["subCategory"],
+                "summary": "Delete subCategory",
+                "parameters": [{
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "description": "With this api you can delete subCategory",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Delete",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "204",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "id": "0c48bcc9-59d4-4df3-be2c-0e64ff77d83b",
+                                                "title": "Romance",
+                                                "subCatId": "d970a5ed-96af-4729-b381-665198234382"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/subcategory-byId/{subId}": {
+            "get": {
+                "tags": ["subCategory"],
+                "summary": "Create a new subCategory",
+                "description": "With this api you can view subCategory",
+                "parameters": [{
+                        "in": "path",
+                        "name": "subId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view subCategory",
+                                            "default": [{
+                                                    "id": "d6fb51de-6adc-4d6c-ba3e-97f2ea9647fb",
+                                                    "title": "Clothes",
+                                                    "product": []
+                                                }]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/sub-subcategory-get": {
+            "get": {
+                "tags": ["Sub SubCategory"],
+                "summary": "View a new sub subCategory",
+                "description": "With this api you can view subCategory",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view subsub Category",
+                                            "default": [{
+                                                    "id": "1120f438-9713-4cab-830e-0bbf97fa3446",
+                                                    "title": "OK"
+                                                },
+                                                {
+                                                    "id": "4fbd4292-21f1-48e8-aa23-6c49046a2664",
+                                                    "title": "OK"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/create-subsubcategory": {
+            "post": {
+                "tags": ["Sub SubCategory"],
+                "summary": "create subCategory",
+                "description": "With this api you can create subCategory",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "subCategoryId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title": "Women",
+                                    "subCategoryId": "1120f438-9713-4cab-830e-0bbf97fa3446"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Create",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "id": "d6fb51de-6adc-4d6c-ba3e-97f2ea9647fb",
+                                                "title": "Women",
+                                                "subCategoryId": "4e0c4333-e451-4a41-83ab-9cc97ae908d7"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/udate-subsubcategory/{id}": {
+            "put": {
+                "tags": ["Sub SubCategory"],
+                "summary": "update subCategory",
+                "parameters": [{
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "description": "With this api you can update subCategory",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "subCategoryId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title": "Romance",
+                                    "subCategoryId": "1a1c3e98-10ba-4a73-86b4-14c5063b3486"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Update",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "id": "0c48bcc9-59d4-4df3-be2c-0e64ff77d83b",
+                                                "title": "Dramma",
+                                                "subCatId": "d970a5ed-96af-4729-b381-665198234382"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/delete-subsubcategory/{id}": {
+            "delete": {
+                "tags": ["Sub SubCategory"],
+                "summary": "Delete subCategory",
+                "parameters": [{
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "description": "With this api you can delete subCategory",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Delete",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "204",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "id": "0c48bcc9-59d4-4df3-be2c-0e64ff77d83b",
+                                                "title": "Romance",
+                                                "subCategoryId": "d970a5ed-96af-4729-b381-665198234382"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/sub-subcategory-byId/{subSubId}": {
+            "get": {
+                "tags": ["Sub SubCategory"],
+                "summary": "Create a new subCategory",
+                "description": "With this api you can view subCategory",
+                "parameters": [{
+                        "in": "path",
+                        "name": "subSubId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view subCategory",
+                                            "default": [{
+                                                    "id": "d6fb51de-6adc-4d6c-ba3e-97f2ea9647fb",
+                                                    "title": "Clothes",
+                                                    "product": []
+                                                }]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/product-get": {
+            "get": {
+                "tags": ["Product"],
+                "summary": "View a new product",
+                "description": "With this api you can view Product",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view Product",
+                                            "default": [{
+                                                    "product_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                    "title": "Cola",
+                                                    "price": 10000,
+                                                    "img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                    "img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                    "size": null,
+                                                    "time": true,
+                                                    "author": null,
+                                                    "made_in": "Turkey",
+                                                    "discount": 20
+                                                },
+                                                {
+                                                    "product_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                    "title": "Cola",
+                                                    "price": 10000,
+                                                    "img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                    "img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                    "size": null,
+                                                    "time": true,
+                                                    "author": null,
+                                                    "made_in": "Turkey",
+                                                    "discount": 20
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/create-product": {
+            "post": {
+                "tags": ["Product"],
+                "summary": "create Product",
+                "description": "With this api you can create Product",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "subSubCategory": {
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "integer"
+                                    },
+                                    "size": {
+                                        "type": "string"
+                                    },
+                                    "brand": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "made_in": {
+                                        "type": "string"
+                                    },
+                                    "img": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Create",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "product_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                "title": "Cola",
+                                                "price": 10000,
+                                                "img": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                "img1": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                "size": null,
+                                                "on_sale": true,
+                                                "time": null,
+                                                "made_in": "Turkey",
+                                                "brand": "nike"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/update-product/{id}": {
+            "put": {
+                "tags": ["Product"],
+                "summary": "update Product",
+                "parameters": [{
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "description": "With this api you can update Product",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "subSubCategory": {
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "integer"
+                                    },
+                                    "size": {
+                                        "type": "string"
+                                    },
+                                    "brand": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "made_in": {
+                                        "type": "string"
+                                    },
+                                    "img": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Update",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "product_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                "title": "Cola",
+                                                "price": 10000,
+                                                "img": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                "img1": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                "size": null,
+                                                "on_sale": true,
+                                                "time": null,
+                                                "made_in": "Turkey",
+                                                "brand": "nike"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/delete-product/{id}": {
+            "delete": {
+                "tags": ["Product"],
+                "summary": "Delete Product",
+                "parameters": [{
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "description": "With this api you can delete Product",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Delete",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "204",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "pro_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                "pro_name": "Cola",
+                                                "pro_price": 10000,
+                                                "pro_img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                "pro_img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                "pro_razmer": null,
+                                                "pro_pol": true,
+                                                "pro_after": null,
+                                                "pro_in": null,
+                                                "pro_langu": null
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/product-getById/{productId}": {
+            "get": {
+                "tags": ["Product"],
+                "summary": "View a new product",
+                "parameters": [{
+                        "in": "path",
+                        "name": "productId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "description": "With this api you can view Product",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view Product",
+                                            "default": [{
+                                                    "product_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                    "title": "Cola",
+                                                    "price": 10000,
+                                                    "img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                    "img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                    "size": null,
+                                                    "time": true,
+                                                    "author": null,
+                                                    "made_in": "Turkey",
+                                                    "discount": 20
+                                                },
+                                                {
+                                                    "product_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                    "title": "Cola",
+                                                    "price": 10000,
+                                                    "img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                    "img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                    "size": null,
+                                                    "time": true,
+                                                    "author": null,
+                                                    "made_in": "Turkey",
+                                                    "discount": 20
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/update-product-discont/{id}": {
+            "put": {
+                "tags": ["Product"],
+                "summary": "update Product add discount or minus",
+                "parameters": [{
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "description": "With this api you can update Product add discount",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "discont": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Update",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "product_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                "title": "Cola",
+                                                "price": 10000,
+                                                "img": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                "img1": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                "size": null,
+                                                "on_sale": true,
+                                                "time": null,
+                                                "made_in": "Turkey",
+                                                "brand": "nike"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/all-products": {
+            "get": {
+                "tags": ["Product"],
+                "summary": "View a new product with radis",
+                "description": "With this api you can view Product with radis",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view Product",
+                                            "default": [{
+                                                    "product_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                    "title": "Cola",
+                                                    "price": 10000,
+                                                    "img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                    "img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                    "size": null,
+                                                    "time": true,
+                                                    "author": null,
+                                                    "made_in": "Turkey",
+                                                    "discount": 20
+                                                },
+                                                {
+                                                    "product_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                    "title": "Cola",
+                                                    "price": 10000,
+                                                    "img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                    "img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                    "size": null,
+                                                    "time": true,
+                                                    "author": null,
+                                                    "made_in": "Turkey",
+                                                    "discount": 20
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/auth": {
+            "post": {
+                "tags": ["Custommers"],
+                "summary": "Registr Custommers",
+                "description": "Custommers Registration to database",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Registrated success",
+                                            "description": "Code send Email"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/login": {
+            "post": {
+                "tags": ["Custommers"],
+                "summary": "Custommers Login",
+                "description": "Custommers Login to get token",
+                "security": [{
+                        "bearerAuth": []
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "example@gmail.com",
+                                    "password": "12345678"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Login Custommers",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/custommer": {
+            "get": {
+                "tags": ["Custommer own page"],
+                "summary": "View a new product",
+                "description": "With this api you can view Custommer own page",
+                "parameters": [{
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view Product",
+                                            "default": [{
+                                                    "id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                    "last_name": "Cola",
+                                                    "password": 10000,
+                                                    "phone": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                    "email": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                    "gender": "men",
+                                                    "avatar": "1675718896532-872403789staff-photo.jpg"
+                                                },
+                                                {
+                                                    "product_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                    "title": "Cola",
+                                                    "price": 10000,
+                                                    "img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                    "img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                    "size": null,
+                                                    "time": true,
+                                                    "author": null,
+                                                    "made_in": "Turkey",
+                                                    "discount": 20
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/custommer-update": {
+            "put": {
+                "tags": ["Custommer own page"],
+                "summary": "update Custommer password email or avatar",
+                "parameters": [{
+                        "name": "token",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "description": "With this api you can update Product add discount",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "avatar": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Update",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": "Update",
+                                            "description": "Status of the response"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/comments": {
+            "get": {
+                "tags": ["Comments"],
+                "summary": "View all comments of Products",
+                "description": "With this api you can view comments",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view Comment",
+                                            "default": [{
+                                                    "comment_id": "56cc845e-e570-4c19-81e7-e08350c442d2",
+                                                    "comment": "Ok"
+                                                },
+                                                {
+                                                    "comment_id": "56cc845e-e570-4c19-81e7-e08350c442d2",
+                                                    "comment": "Ok"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/create-comments": {
+            "post": {
+                "tags": ["Comments"],
+                "summary": "create comment",
+                "description": "With this api you can create new comment",
+                "parameters": [{
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "productId": {
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Create",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "comment_id": "56cc845e-e570-4c19-81e7-e08350c442d2",
+                                                "comment": "Ok"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/update-comment/{id}": {
+            "put": {
+                "tags": ["Comments"],
+                "summary": "update comment",
+                "parameters": [{
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }],
+                "description": "With this api you can update comment",
+                "security": [{
+                        "bearerAuth": []
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Update",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "id": "56cc845e-e570-4c19-81e7-e08350c442d2",
+                                                "title": "Ok"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/orders-get": {
+            "get": {
+                "tags": ["Orders"],
+                "summary": "View a new Orders",
+                "description": "With this api you can view Orders",
+                "parameters": [{
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    }],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view karzinka",
+                                            "default": {
+                                                "data": [
+                                                    {
+                                                        "id": "82687734-7450-44f1-a1ed-4547e481602a",
+                                                        "count": 4,
+                                                        "custommer": {
+                                                            "first_name": "Nodirjon",
+                                                            "last_name": "Smailov",
+                                                            "avatar": "1676056341802-69281323staff-photo.jpg"
+                                                        },
+                                                        "product": {
+                                                            "title": "Goody New",
+                                                            "price": "100000",
+                                                            "discont_price": "80000",
+                                                            "brand": "adidas",
+                                                            "made_in": "Turkey",
+                                                            "discont": 20
+                                                        }
+                                                    },
+                                                    {
+                                                        "id": "7c775bfe-083f-4506-aada-99495e593d00",
+                                                        "count": 10,
+                                                        "custommer": {
+                                                            "first_name": "Nodirjon",
+                                                            "last_name": "Smailov",
+                                                            "avatar": "1676056341802-69281323staff-photo.jpg"
+                                                        },
+                                                        "product": {
+                                                            "title": "Shirts red",
+                                                            "price": "200000",
+                                                            "discont_price": "0",
+                                                            "brand": "adidas",
+                                                            "made_in": "Turkey",
+                                                            "discont": 0
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/create-order": {
+            "post": {
+                "tags": ["Orders"],
+                "summary": "create Orders",
+                "description": "With this api you can create Orders",
+                "parameters": [{
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "productId": {
+                                        "type": "string"
+                                    },
+                                    "count": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Create",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "order_id": "bb60c0e9-e76b-4fc7-a1bd-98c808172b91",
+                                                "custommerId": "557d94f4-f5d1-4ec1-b6e1-0af2b08446f0",
+                                                "productId": "a6b67614-81ed-4fb5-9e6e-47ce9a36e235"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/delete-order/{id}": {
+            "delete": {
+                "tags": ["Orders"],
+                "summary": "Delete Orders",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "description": "With this api you can delete Order",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Delete",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "204",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "id": "bb60c0e9-e76b-4fc7-a1bd-98c808172b91",
+                                                "productId": "557d94f4-f5d1-4ec1-b6e1-0af2b08446f0",
+                                                "custommerId": "a6b67614-81ed-4fb5-9e6e-47ce9a36e235"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/create-rate": {
+            "post": {
+                "tags": ["Rate"],
+                "summary": "create Rate",
+                "description": "With this api you can create Rate",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "productId": {
+                                        "type": "string"
+                                    },
+                                    "stars": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Create",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "order_id": "bb60c0e9-e76b-4fc7-a1bd-98c808172b91",
+                                                "custommerId": "557d94f4-f5d1-4ec1-b6e1-0af2b08446f0",
+                                                "productId": "a6b67614-81ed-4fb5-9e6e-47ce9a36e235"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/rate-get": {
+            "get": {
+                "tags": ["Rate"],
+                "summary": "View a new Rate",
+                "description": "With this api you can view Rate",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view karzinka",
+                                            "default": {
+                                                "data": [
+                                                    {
+                                                        "id": "55e032b4-20d8-481f-9078-097bc8043ef7",
+                                                        "stars": 3,
+                                                        "count_stars": 1,
+                                                        "avarage_stars": "3",
+                                                        "product": {
+                                                            "id": "e6a4989f-92cb-4bf5-97fc-ff6470959921",
+                                                            "title": "Shirts",
+                                                            "price": "100000",
+                                                            "discont_price": "0",
+                                                            "brand": "adidas",
+                                                            "size": "72",
+                                                            "netto": "200 gr",
+                                                            "author": null,
+                                                            "description": "Good Costum",
+                                                            "color": "black",
+                                                            "made_in": "Turkey",
+                                                            "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                            "img1": "sadfhdsafadfusahdfjadfj",
+                                                            "img2": "adsfhadfhadfhadfjadsgjad",
+                                                            "on_sale": true,
+                                                            "discont": 0,
+                                                            "sold_count": 4,
+                                                            "time": "2023-02-06T18:04:33.483Z"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/discont-products": {
+            "get": {
+                "tags": ["Sorting"],
+                "summary": "View products which has discount",
+                "description": "With this api you can view products which has discount",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view karzinka",
+                                            "default": {
+                                                "data": [
+                                                    {
+                                                        "title": "Goody New",
+                                                        "price": "100000",
+                                                        "discont_price": "80000",
+                                                        "made_in": "Turkey",
+                                                        "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                        "discont": 20,
+                                                        "sold_count": 4
+                                                    },
+                                                    {
+                                                        "title": "Shirts",
+                                                        "price": "100000",
+                                                        "discont_price": "0",
+                                                        "made_in": "Turkey",
+                                                        "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                        "discont": 0,
+                                                        "sold_count": 4
+                                                    },
+                                                    {
+                                                        "title": "Shirts white",
+                                                        "price": "200000",
+                                                        "discont_price": "0",
+                                                        "made_in": "Turkey",
+                                                        "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                        "discont": 0,
+                                                        "sold_count": 0
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/sortBySold-product": {
+            "get": {
+                "tags": ["Sorting"],
+                "summary": "View products which has most sold",
+                "description": "With this api you can view products which most sold",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view karzinka",
+                                            "default": {
+                                                "data": [
+                                                    {
+                                                        "title": "Goody New",
+                                                        "price": "100000",
+                                                        "discont_price": "80000",
+                                                        "made_in": "Turkey",
+                                                        "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                        "discont": 20,
+                                                        "sold_count": 4
+                                                    },
+                                                    {
+                                                        "title": "Shirts",
+                                                        "price": "100000",
+                                                        "discont_price": "0",
+                                                        "made_in": "Turkey",
+                                                        "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                        "discont": 0,
+                                                        "sold_count": 4
+                                                    },
+                                                    {
+                                                        "title": "Shirts white",
+                                                        "price": "200000",
+                                                        "discont_price": "0",
+                                                        "made_in": "Turkey",
+                                                        "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                        "discont": 0,
+                                                        "sold_count": 0
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/rate-products": {
+            "get": {
+                "tags": ["Sorting"],
+                "summary": "View products which has rate",
+                "description": "With this api you can view products which rate",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view rateing of products",
+                                            "default": {
+                                                "data": [
+                                                    {
+                                                        "id": "c756fed5-b550-416d-a793-a8c03ca35ae8",
+                                                        "stars": 5,
+                                                        "count_stars": 1,
+                                                        "avarage_stars": "5",
+                                                        "product": {
+                                                            "title": "Shirts red",
+                                                            "price": "200000",
+                                                            "discont_price": "0",
+                                                            "made_in": "Turkey",
+                                                            "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                            "discont": 0,
+                                                            "sold_count": 10
+                                                        }
+                                                    },
+                                                    {
+                                                        "id": "63d20b6c-1492-4df3-8b35-cc80b9b361da",
+                                                        "stars": 3,
+                                                        "count_stars": 1,
+                                                        "avarage_stars": "3",
+                                                        "product": {
+                                                            "title": "Shirts white",
+                                                            "price": "200000",
+                                                            "discont_price": "0",
+                                                            "made_in": "Turkey",
+                                                            "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                            "discont": 0,
+                                                            "sold_count": 0
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/get-newProducts": {
+            "get": {
+                "tags": ["Sorting"],
+                "summary": "View products which new created products",
+                "description": "With this api you can view products which new created products",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view rateing of products",
+                                            "default": {
+                                                "data": [
+                                                    {
+                                                        "title": "Shirts green",
+                                                        "price": "200000",
+                                                        "discont_price": "0",
+                                                        "made_in": "Turkey",
+                                                        "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                        "discont": 0,
+                                                        "sold_count": 0,
+                                                        "time": "2023-02-06T20:06:00.418Z",
+                                                        "rate": null
+                                                    },
+                                                    {
+                                                        "title": "Shirts white",
+                                                        "price": "200000",
+                                                        "discont_price": "0",
+                                                        "made_in": "Turkey",
+                                                        "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                        "discont": 0,
+                                                        "sold_count": 0,
+                                                        "time": "2023-02-06T20:05:50.469Z",
+                                                        "rate": {
+                                                            "id": "63d20b6c-1492-4df3-8b35-cc80b9b361da",
+                                                            "stars": 3,
+                                                            "count_stars": 1,
+                                                            "avarage_stars": "3"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/meros/get-oldProducts": {
+            "get": {
+                "tags": ["Sorting"],
+                "summary": "View products which new created products",
+                "description": "With this api you can view products which new created products",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view rateing of products",
+                                            "default": {
+                                                "data": [
+                                                    {
+                                                        "title": "Shirts green",
+                                                        "price": "200000",
+                                                        "discont_price": "0",
+                                                        "made_in": "Turkey",
+                                                        "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                        "discont": 0,
+                                                        "sold_count": 0,
+                                                        "time": "2023-02-06T20:06:00.418Z",
+                                                        "rate": null
+                                                    },
+                                                    {
+                                                        "title": "Shirts white",
+                                                        "price": "200000",
+                                                        "discont_price": "0",
+                                                        "made_in": "Turkey",
+                                                        "img": "https://media.istockphoto.com/id/1281631373/vector/mockup-template-men-black-t-shirt-short-sleeve.jpg?s=612x612&w=0&k=20&c=SfYrtFXQS2wJ1-R9ozvxhUabJz3cnmH5HXv2sXW_mZk=",
+                                                        "discont": 0,
+                                                        "sold_count": 0,
+                                                        "time": "2023-02-06T20:05:50.469Z",
+                                                        "rate": {
+                                                            "id": "63d20b6c-1492-4df3-8b35-cc80b9b361da",
+                                                            "stars": 3,
+                                                            "count_stars": 1,
+                                                            "avarage_stars": "3"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
